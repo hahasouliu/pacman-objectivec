@@ -1,0 +1,519 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F1CED4981BCE946C0019A9DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CED4971BCE946C0019A9DF /* main.m */; };
+		F1CED49B1BCE946C0019A9DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CED49A1BCE946C0019A9DF /* AppDelegate.m */; };
+		F1CED49E1BCE946C0019A9DF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CED49D1BCE946C0019A9DF /* ViewController.m */; };
+		F1CED4A11BCE946C0019A9DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1CED49F1BCE946C0019A9DF /* Main.storyboard */; };
+		F1CED4A31BCE946C0019A9DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1CED4A21BCE946C0019A9DF /* Assets.xcassets */; };
+		F1CED4A61BCE946C0019A9DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1CED4A41BCE946C0019A9DF /* LaunchScreen.storyboard */; };
+		F1CED4B11BCE946C0019A9DF /* pacman_objectivecTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CED4B01BCE946C0019A9DF /* pacman_objectivecTests.m */; };
+		F1CED4BC1BCE946C0019A9DF /* pacman_objectivecUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CED4BB1BCE946C0019A9DF /* pacman_objectivecUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F1CED4AD1BCE946C0019A9DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1CED48B1BCE946C0019A9DF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1CED4921BCE946C0019A9DF;
+			remoteInfo = "pacman-objectivec";
+		};
+		F1CED4B81BCE946C0019A9DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1CED48B1BCE946C0019A9DF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1CED4921BCE946C0019A9DF;
+			remoteInfo = "pacman-objectivec";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F1CED4931BCE946C0019A9DF /* pacman-objectivec.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pacman-objectivec.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1CED4971BCE946C0019A9DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F1CED4991BCE946C0019A9DF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F1CED49A1BCE946C0019A9DF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F1CED49C1BCE946C0019A9DF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F1CED49D1BCE946C0019A9DF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F1CED4A01BCE946C0019A9DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F1CED4A21BCE946C0019A9DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F1CED4A51BCE946C0019A9DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F1CED4A71BCE946C0019A9DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1CED4AC1BCE946C0019A9DF /* pacman-objectivecTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pacman-objectivecTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1CED4B01BCE946C0019A9DF /* pacman_objectivecTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = pacman_objectivecTests.m; sourceTree = "<group>"; };
+		F1CED4B21BCE946C0019A9DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1CED4B71BCE946C0019A9DF /* pacman-objectivecUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pacman-objectivecUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1CED4BB1BCE946C0019A9DF /* pacman_objectivecUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = pacman_objectivecUITests.m; sourceTree = "<group>"; };
+		F1CED4BD1BCE946C0019A9DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F1CED4901BCE946C0019A9DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1CED4A91BCE946C0019A9DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1CED4B41BCE946C0019A9DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F1CED48A1BCE946C0019A9DF = {
+			isa = PBXGroup;
+			children = (
+				F1CED4951BCE946C0019A9DF /* pacman-objectivec */,
+				F1CED4AF1BCE946C0019A9DF /* pacman-objectivecTests */,
+				F1CED4BA1BCE946C0019A9DF /* pacman-objectivecUITests */,
+				F1CED4941BCE946C0019A9DF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F1CED4941BCE946C0019A9DF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1CED4931BCE946C0019A9DF /* pacman-objectivec.app */,
+				F1CED4AC1BCE946C0019A9DF /* pacman-objectivecTests.xctest */,
+				F1CED4B71BCE946C0019A9DF /* pacman-objectivecUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1CED4951BCE946C0019A9DF /* pacman-objectivec */ = {
+			isa = PBXGroup;
+			children = (
+				F1CED4991BCE946C0019A9DF /* AppDelegate.h */,
+				F1CED49A1BCE946C0019A9DF /* AppDelegate.m */,
+				F1CED49C1BCE946C0019A9DF /* ViewController.h */,
+				F1CED49D1BCE946C0019A9DF /* ViewController.m */,
+				F1CED49F1BCE946C0019A9DF /* Main.storyboard */,
+				F1CED4A21BCE946C0019A9DF /* Assets.xcassets */,
+				F1CED4A41BCE946C0019A9DF /* LaunchScreen.storyboard */,
+				F1CED4A71BCE946C0019A9DF /* Info.plist */,
+				F1CED4961BCE946C0019A9DF /* Supporting Files */,
+			);
+			path = "pacman-objectivec";
+			sourceTree = "<group>";
+		};
+		F1CED4961BCE946C0019A9DF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F1CED4971BCE946C0019A9DF /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F1CED4AF1BCE946C0019A9DF /* pacman-objectivecTests */ = {
+			isa = PBXGroup;
+			children = (
+				F1CED4B01BCE946C0019A9DF /* pacman_objectivecTests.m */,
+				F1CED4B21BCE946C0019A9DF /* Info.plist */,
+			);
+			path = "pacman-objectivecTests";
+			sourceTree = "<group>";
+		};
+		F1CED4BA1BCE946C0019A9DF /* pacman-objectivecUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F1CED4BB1BCE946C0019A9DF /* pacman_objectivecUITests.m */,
+				F1CED4BD1BCE946C0019A9DF /* Info.plist */,
+			);
+			path = "pacman-objectivecUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F1CED4921BCE946C0019A9DF /* pacman-objectivec */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1CED4C01BCE946C0019A9DF /* Build configuration list for PBXNativeTarget "pacman-objectivec" */;
+			buildPhases = (
+				F1CED48F1BCE946C0019A9DF /* Sources */,
+				F1CED4901BCE946C0019A9DF /* Frameworks */,
+				F1CED4911BCE946C0019A9DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "pacman-objectivec";
+			productName = "pacman-objectivec";
+			productReference = F1CED4931BCE946C0019A9DF /* pacman-objectivec.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F1CED4AB1BCE946C0019A9DF /* pacman-objectivecTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1CED4C31BCE946C0019A9DF /* Build configuration list for PBXNativeTarget "pacman-objectivecTests" */;
+			buildPhases = (
+				F1CED4A81BCE946C0019A9DF /* Sources */,
+				F1CED4A91BCE946C0019A9DF /* Frameworks */,
+				F1CED4AA1BCE946C0019A9DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1CED4AE1BCE946C0019A9DF /* PBXTargetDependency */,
+			);
+			name = "pacman-objectivecTests";
+			productName = "pacman-objectivecTests";
+			productReference = F1CED4AC1BCE946C0019A9DF /* pacman-objectivecTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F1CED4B61BCE946C0019A9DF /* pacman-objectivecUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1CED4C61BCE946C0019A9DF /* Build configuration list for PBXNativeTarget "pacman-objectivecUITests" */;
+			buildPhases = (
+				F1CED4B31BCE946C0019A9DF /* Sources */,
+				F1CED4B41BCE946C0019A9DF /* Frameworks */,
+				F1CED4B51BCE946C0019A9DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1CED4B91BCE946C0019A9DF /* PBXTargetDependency */,
+			);
+			name = "pacman-objectivecUITests";
+			productName = "pacman-objectivecUITests";
+			productReference = F1CED4B71BCE946C0019A9DF /* pacman-objectivecUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F1CED48B1BCE946C0019A9DF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = hahasouliu;
+				TargetAttributes = {
+					F1CED4921BCE946C0019A9DF = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+					F1CED4AB1BCE946C0019A9DF = {
+						CreatedOnToolsVersion = 7.0.1;
+						TestTargetID = F1CED4921BCE946C0019A9DF;
+					};
+					F1CED4B61BCE946C0019A9DF = {
+						CreatedOnToolsVersion = 7.0.1;
+						TestTargetID = F1CED4921BCE946C0019A9DF;
+					};
+				};
+			};
+			buildConfigurationList = F1CED48E1BCE946C0019A9DF /* Build configuration list for PBXProject "pacman-objectivec" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F1CED48A1BCE946C0019A9DF;
+			productRefGroup = F1CED4941BCE946C0019A9DF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F1CED4921BCE946C0019A9DF /* pacman-objectivec */,
+				F1CED4AB1BCE946C0019A9DF /* pacman-objectivecTests */,
+				F1CED4B61BCE946C0019A9DF /* pacman-objectivecUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F1CED4911BCE946C0019A9DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1CED4A61BCE946C0019A9DF /* LaunchScreen.storyboard in Resources */,
+				F1CED4A31BCE946C0019A9DF /* Assets.xcassets in Resources */,
+				F1CED4A11BCE946C0019A9DF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1CED4AA1BCE946C0019A9DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1CED4B51BCE946C0019A9DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F1CED48F1BCE946C0019A9DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1CED49E1BCE946C0019A9DF /* ViewController.m in Sources */,
+				F1CED49B1BCE946C0019A9DF /* AppDelegate.m in Sources */,
+				F1CED4981BCE946C0019A9DF /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1CED4A81BCE946C0019A9DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1CED4B11BCE946C0019A9DF /* pacman_objectivecTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1CED4B31BCE946C0019A9DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1CED4BC1BCE946C0019A9DF /* pacman_objectivecUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F1CED4AE1BCE946C0019A9DF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1CED4921BCE946C0019A9DF /* pacman-objectivec */;
+			targetProxy = F1CED4AD1BCE946C0019A9DF /* PBXContainerItemProxy */;
+		};
+		F1CED4B91BCE946C0019A9DF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1CED4921BCE946C0019A9DF /* pacman-objectivec */;
+			targetProxy = F1CED4B81BCE946C0019A9DF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F1CED49F1BCE946C0019A9DF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1CED4A01BCE946C0019A9DF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F1CED4A41BCE946C0019A9DF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1CED4A51BCE946C0019A9DF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F1CED4BE1BCE946C0019A9DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		F1CED4BF1BCE946C0019A9DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F1CED4C11BCE946C0019A9DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "pacman-objectivec/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "hahasouliu.pacman-objectivec";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F1CED4C21BCE946C0019A9DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "pacman-objectivec/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "hahasouliu.pacman-objectivec";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F1CED4C41BCE946C0019A9DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "pacman-objectivecTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "hahasouliu.pacman-objectivecTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pacman-objectivec.app/pacman-objectivec";
+			};
+			name = Debug;
+		};
+		F1CED4C51BCE946C0019A9DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "pacman-objectivecTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "hahasouliu.pacman-objectivecTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pacman-objectivec.app/pacman-objectivec";
+			};
+			name = Release;
+		};
+		F1CED4C71BCE946C0019A9DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "pacman-objectivecUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "hahasouliu.pacman-objectivecUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "pacman-objectivec";
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		F1CED4C81BCE946C0019A9DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "pacman-objectivecUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "hahasouliu.pacman-objectivecUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "pacman-objectivec";
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F1CED48E1BCE946C0019A9DF /* Build configuration list for PBXProject "pacman-objectivec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1CED4BE1BCE946C0019A9DF /* Debug */,
+				F1CED4BF1BCE946C0019A9DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1CED4C01BCE946C0019A9DF /* Build configuration list for PBXNativeTarget "pacman-objectivec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1CED4C11BCE946C0019A9DF /* Debug */,
+				F1CED4C21BCE946C0019A9DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F1CED4C31BCE946C0019A9DF /* Build configuration list for PBXNativeTarget "pacman-objectivecTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1CED4C41BCE946C0019A9DF /* Debug */,
+				F1CED4C51BCE946C0019A9DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F1CED4C61BCE946C0019A9DF /* Build configuration list for PBXNativeTarget "pacman-objectivecUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1CED4C71BCE946C0019A9DF /* Debug */,
+				F1CED4C81BCE946C0019A9DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F1CED48B1BCE946C0019A9DF /* Project object */;
+}
