@@ -36,6 +36,15 @@
 @synthesize touchStartPoint = _touchStartPoint;
 @synthesize touchEndPoint = _touchEndPoint;
 
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if ((self = [super initWithCoder:aDecoder]) ) {
+        // init children array
+        self.children = [[NSMutableArray alloc] initWithCapacity:20];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     // Do any additional setup after loading the view, typically from a nib.
     
@@ -44,6 +53,7 @@
     self.screenWidth = [[UIScreen mainScreen] bounds].size.width;
     self.screenHeight = [[UIScreen mainScreen] bounds].size.height;
     NSLog(@"Screen size [%f, %f]", self.screenWidth, self.screenHeight);
+    NSLog(@"Screen size 2 [%f, %f]", self.view.bounds.size.width, self.view.bounds.size.height);
     
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     
@@ -60,8 +70,7 @@
     self.baseEffect = [[GLKBaseEffect alloc] init];
     self.baseEffect.transform.projectionMatrix = projectionMatrix;
     
-    // init children array
-    self.children = [NSMutableArray array];
+
     
     // setup pacman
     self.pacmanSprite = [[BaseSprite alloc] initWithFile:@"pacman-2.png" effect:self.baseEffect];
@@ -78,12 +87,26 @@
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
     [self.view addGestureRecognizer:tapRecognizer];
     
+    UISwipeGestureRecognizer *swipeUpRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeUp:)];
+    UISwipeGestureRecognizer *swipeDownRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeDown:)];
+    UISwipeGestureRecognizer *swipeRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeRight:)];
+    UISwipeGestureRecognizer *swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeLeft:)];
+    
+    swipeUpRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
+    swipeDownRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+    swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipeUpRecognizer];
+    [self.view addGestureRecognizer:swipeDownRecognizer];
+    [self.view addGestureRecognizer:swipeRightRecognizer];
+    [self.view addGestureRecognizer:swipeLeftRecognizer];
+    
     // init touch
     self.isTouchStart = false;
     
     
 }
-
+/*
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     self.touchStartPoint = [[touches anyObject] locationInView:self.view];
     NSLog(@"touchesBegan [%f, %f]", self.touchStartPoint.x, self.touchStartPoint.y);
@@ -104,7 +127,7 @@
         [self calculateMotion];
     }
 }
-
+*/
 - (void) calculateMotion {
     int motionX = self.touchEndPoint.x - self.touchStartPoint.x;
     int motionY = self.touchStartPoint.y - self.touchEndPoint.y; // reverse Y axis
@@ -140,12 +163,32 @@
     NSLog(@"handleTapFrom [%f, %f]", touchLocation.x, touchLocation.y);
 }
 
+- (void)handleSwipeUp:(UISwipeGestureRecognizer *)recognizer {
+    NSLog(@"Swipe up");
+    self.pacmanSprite.moveVelocity = GLKVector2Make(0, 10);
+}
+
+- (void)handleSwipeDown:(UISwipeGestureRecognizer *)recognizer {
+    NSLog(@"Swipe down");
+    self.pacmanSprite.moveVelocity = GLKVector2Make(0, -10);
+}
+
+- (void)handleSwipeRight:(UISwipeGestureRecognizer *)recognizer {
+    NSLog(@"Swipe right");
+    self.pacmanSprite.moveVelocity = GLKVector2Make(10, 0);
+}
+
+- (void)handleSwipeLeft:(UISwipeGestureRecognizer *)recognizer {
+    NSLog(@"Swipe left");
+    self.pacmanSprite.moveVelocity = GLKVector2Make(-10, 0);
+}
+
 - (void)addGhost {
     BaseSprite * ghost = [[BaseSprite alloc] initWithFile:@"red-ghost-1.png" effect:self.baseEffect];
     [self.children addObject:ghost];
     
     int minY = 0;
-    int maxY = self.screenHeight - ghost.contentSize.height/4;
+    int maxY = self.screenHeight - ghost.contentSize.height;
     //NSLog(@"ghost x %f", ghost.contentSize.width/4);
     //NSLog(@"ghost y [%d, %d]", minY, maxY);
     int rangeY = maxY - minY;
@@ -165,6 +208,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+    NSLog(@"didReceiveMemoryWarning");
+    [EAGLContext setCurrentContext:self.context];
+    glDeleteBuffers(1, &_vertextBufferId);
+    
+    GLuint textureBufferId = self.pacmanSprite.textureInfo.name;
+    glDeleteTextures(1, &textureBufferId);
+    
+    self.baseEffect = nil;
+    self.context = nil;
+    [EAGLContext setCurrentContext:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

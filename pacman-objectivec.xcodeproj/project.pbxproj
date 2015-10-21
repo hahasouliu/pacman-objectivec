@@ -13,9 +13,6 @@
 		F157FD711BCE95FA00C89081 /* MapSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = F157FD701BCE95FA00C89081 /* MapSprite.m */; settings = {ASSET_TAGS = (); }; };
 		F157FD7A1BCE97FC00C89081 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F157FD791BCE97FC00C89081 /* Foundation.framework */; };
 		F157FD7E1BCE994E00C89081 /* GameScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F157FD7D1BCE994E00C89081 /* GameScene.storyboard */; settings = {ASSET_TAGS = (); }; };
-		F157FD821BCEA30800C89081 /* map-1.png in Resources */ = {isa = PBXBuildFile; fileRef = F157FD811BCEA30800C89081 /* map-1.png */; settings = {ASSET_TAGS = (); }; };
-		F157FD841BCEA31F00C89081 /* pacman-2.png in Resources */ = {isa = PBXBuildFile; fileRef = F157FD831BCEA31F00C89081 /* pacman-2.png */; settings = {ASSET_TAGS = (); }; };
-		F157FD861BCEA32900C89081 /* red-ghost-1.png in Resources */ = {isa = PBXBuildFile; fileRef = F157FD851BCEA32900C89081 /* red-ghost-1.png */; settings = {ASSET_TAGS = (); }; };
 		F1CED4981BCE946C0019A9DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CED4971BCE946C0019A9DF /* main.m */; };
 		F1CED49B1BCE946C0019A9DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CED49A1BCE946C0019A9DF /* AppDelegate.m */; };
 		F1CED49E1BCE946C0019A9DF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CED49D1BCE946C0019A9DF /* ViewController.m */; };
@@ -24,6 +21,9 @@
 		F1CED4B11BCE946C0019A9DF /* pacman_objectivecTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CED4B01BCE946C0019A9DF /* pacman_objectivecTests.m */; };
 		F1CED4BC1BCE946C0019A9DF /* pacman_objectivecUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CED4BB1BCE946C0019A9DF /* pacman_objectivecUITests.m */; };
 		F1CED4CA1BCE94940019A9DF /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1CED4C91BCE94940019A9DF /* GLKit.framework */; };
+		F1E8E2621BCFD37C00AD0868 /* map-1.png in Resources */ = {isa = PBXBuildFile; fileRef = F1E8E25F1BCFD37C00AD0868 /* map-1.png */; settings = {ASSET_TAGS = (); }; };
+		F1E8E2631BCFD37C00AD0868 /* pacman-2.png in Resources */ = {isa = PBXBuildFile; fileRef = F1E8E2601BCFD37C00AD0868 /* pacman-2.png */; settings = {ASSET_TAGS = (); }; };
+		F1E8E2641BCFD37C00AD0868 /* red-ghost-1.png in Resources */ = {isa = PBXBuildFile; fileRef = F1E8E2611BCFD37C00AD0868 /* red-ghost-1.png */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,9 +52,6 @@
 		F157FD701BCE95FA00C89081 /* MapSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapSprite.m; sourceTree = "<group>"; };
 		F157FD791BCE97FC00C89081 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F157FD7D1BCE994E00C89081 /* GameScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GameScene.storyboard; sourceTree = "<group>"; };
-		F157FD811BCEA30800C89081 /* map-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-1.png"; sourceTree = "<group>"; };
-		F157FD831BCEA31F00C89081 /* pacman-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pacman-2.png"; sourceTree = "<group>"; };
-		F157FD851BCEA32900C89081 /* red-ghost-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-ghost-1.png"; sourceTree = "<group>"; };
 		F1CED4931BCE946C0019A9DF /* pacman-objectivec.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pacman-objectivec.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1CED4971BCE946C0019A9DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F1CED4991BCE946C0019A9DF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -71,6 +68,9 @@
 		F1CED4BB1BCE946C0019A9DF /* pacman_objectivecUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = pacman_objectivecUITests.m; sourceTree = "<group>"; };
 		F1CED4BD1BCE946C0019A9DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1CED4C91BCE94940019A9DF /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		F1E8E25F1BCFD37C00AD0868 /* map-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-1.png"; path = "pacman-resources/map-1.png"; sourceTree = "<group>"; };
+		F1E8E2601BCFD37C00AD0868 /* pacman-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pacman-2.png"; path = "pacman-resources/pacman-2.png"; sourceTree = "<group>"; };
+		F1E8E2611BCFD37C00AD0868 /* red-ghost-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "red-ghost-1.png"; path = "pacman-resources/red-ghost-1.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,16 +102,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F157FD871BCEA35100C89081 /* resources */ = {
-			isa = PBXGroup;
-			children = (
-				F157FD851BCEA32900C89081 /* red-ghost-1.png */,
-				F157FD831BCEA31F00C89081 /* pacman-2.png */,
-				F157FD811BCEA30800C89081 /* map-1.png */,
-			);
-			name = resources;
-			sourceTree = "<group>";
-		};
 		F1CED48A1BCE946C0019A9DF = {
 			isa = PBXGroup;
 			children = (
@@ -139,7 +129,7 @@
 		F1CED4951BCE946C0019A9DF /* pacman-objectivec */ = {
 			isa = PBXGroup;
 			children = (
-				F157FD871BCEA35100C89081 /* resources */,
+				F1E8E25E1BCFD33600AD0868 /* pacman-resources */,
 				F1CED4991BCE946C0019A9DF /* AppDelegate.h */,
 				F1CED49A1BCE946C0019A9DF /* AppDelegate.m */,
 				F1CED49C1BCE946C0019A9DF /* ViewController.h */,
@@ -181,6 +171,16 @@
 				F1CED4BD1BCE946C0019A9DF /* Info.plist */,
 			);
 			path = "pacman-objectivecUITests";
+			sourceTree = "<group>";
+		};
+		F1E8E25E1BCFD33600AD0868 /* pacman-resources */ = {
+			isa = PBXGroup;
+			children = (
+				F1E8E25F1BCFD37C00AD0868 /* map-1.png */,
+				F1E8E2601BCFD37C00AD0868 /* pacman-2.png */,
+				F1E8E2611BCFD37C00AD0868 /* red-ghost-1.png */,
+			);
+			name = "pacman-resources";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,10 +286,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F157FD841BCEA31F00C89081 /* pacman-2.png in Resources */,
-				F157FD821BCEA30800C89081 /* map-1.png in Resources */,
+				F1E8E2631BCFD37C00AD0868 /* pacman-2.png in Resources */,
+				F1E8E2621BCFD37C00AD0868 /* map-1.png in Resources */,
 				F1CED4A61BCE946C0019A9DF /* LaunchScreen.storyboard in Resources */,
-				F157FD861BCEA32900C89081 /* red-ghost-1.png in Resources */,
+				F1E8E2641BCFD37C00AD0868 /* red-ghost-1.png in Resources */,
 				F157FD7E1BCE994E00C89081 /* GameScene.storyboard in Resources */,
 				F1CED4A31BCE946C0019A9DF /* Assets.xcassets in Resources */,
 			);

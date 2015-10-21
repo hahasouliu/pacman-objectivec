@@ -17,12 +17,12 @@ typedef struct {
 } VertexData;
 
 VertexData SpriteVertices[] = {
-    {{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f}},
-    {{SQUARE_SIZE, 0.0f, 0.0f}, {1.0f, 0.0f}},
-    {{0.0f, SQUARE_SIZE, 0.0f}, {0.0f, 1.0f}},
-    {{0.0f, SQUARE_SIZE, 0.0f}, {0.0f, 1.0f}},
-    {{SQUARE_SIZE, 0.0f, 0.0f}, {1.0f, 0.0f}},
-    {{SQUARE_SIZE, SQUARE_SIZE, 0.0f}, {1.0f, 1.0f}}
+    {{-SQUARE_SIZE/2, -SQUARE_SIZE/2, 0.0f}, {0.0f, 0.0f}},
+    {{SQUARE_SIZE/2, -SQUARE_SIZE/2, 0.0f}, {1.0f, 0.0f}},
+    {{-SQUARE_SIZE/2, SQUARE_SIZE/2, 0.0f}, {0.0f, 1.0f}},
+    {{-SQUARE_SIZE/2, SQUARE_SIZE/2, 0.0f}, {0.0f, 1.0f}},
+    {{SQUARE_SIZE/2, -SQUARE_SIZE/2, 0.0f}, {1.0f, 0.0f}},
+    {{SQUARE_SIZE/2, SQUARE_SIZE/2, 0.0f}, {1.0f, 1.0f}}
 };
 
 @interface BaseSprite()
@@ -96,6 +96,10 @@ VertexData SpriteVertices[] = {
     GLKMatrix4 modelMatrix = GLKMatrix4Identity;
     
     modelMatrix = GLKMatrix4Translate(modelMatrix, self.position.x, self.position.y, 0);
+    modelMatrix = GLKMatrix4Translate(modelMatrix, self.contentSize.width/2, self.contentSize.height/2, 0);
+    modelMatrix = GLKMatrix4Rotate(modelMatrix, GLKMathDegreesToRadians(90.0f), 0, 0, 1);
+    //modelMatrix = GLKMatrix4Translate(modelMatrix, -self.contentSize.width/2, -self.contentSize.height/2, 0);
+    
     //modelMatrix = GLKMatrix4Scale(modelMatrix, 0.25, 0.25, 0);
     return modelMatrix;
 }
@@ -104,21 +108,20 @@ VertexData SpriteVertices[] = {
     GLKVector2 curMove = GLKVector2MultiplyScalar(self.moveVelocity, 1);
     
     GLKVector2 updatedPosition = GLKVector2Add(self.position, curMove);
+ /*
+    NSLog(@"update curMove[%f, %f]", curMove.x, curMove.y);
+    NSLog(@"update bounday[%f, %f]", self.boundayX, self.boundayY);
+    NSLog(@"update bounday cal [%f, %f]", self.boundayX-(self.contentSize.width), self.boundayY-(self.contentSize.height));
+    NSLog(@"update updatedPosition[%f, %f]", updatedPosition.x, updatedPosition.y);
     
-    //NSLog(@"update curMove[%f, %f]", curMove.x, curMove.y);
-    //NSLog(@"update bounday[%f, %f]", self.boundayX, self.boundayY);
-    //NSLog(@"update bounday cal [%f, %f]", self.boundayX-(self.contentSize.width/4), self.boundayY-(self.contentSize.height/4));
-    //NSLog(@"update updatedPosition[%f, %f]", updatedPosition.x, updatedPosition.y);
-    
-    //NSLog(@"updatedPosition.x %f", updatedPosition.x);
-    //NSLog(@"self.contentSize.width/4 %f", self.contentSize.width/4);
-    
-    
+    NSLog(@"updatedPosition.x %f", updatedPosition.x);
+    NSLog(@"self.contentSize.width %f", self.contentSize.width);
+   */
     if (self.boundayX > 0 && self.boundayY > 0) {
         if (updatedPosition.x >= 0 &&
-            updatedPosition.x <= self.boundayX-(self.contentSize.width/4) &&
+            updatedPosition.x <= self.boundayX-(self.contentSize.width) &&
             updatedPosition.y >= 0 &&
-            updatedPosition.y <= self.boundayY-(self.contentSize.height/4) ) {
+            updatedPosition.y <= self.boundayY-(self.contentSize.height) ) {
             //NSLog(@"update updatePosition");
             self.position = updatedPosition;
         } else {
