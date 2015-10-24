@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
+#import "BaseMapSprite.h"
 
 @interface BaseSprite : NSObject
 
@@ -16,9 +17,14 @@
 - (void)setMoveBoundary:(float)boundaryX boundaryY:(float)boundaryY;
 
 @property (nonatomic, strong) GLKTextureInfo *textureInfo;
+@property (nonatomic, weak) NSMutableArray *mapSpriteArray;
 @property (assign) GLKVector2 position;
 @property (assign) GLKVector2 moveVelocity;
 @property (assign) CGSize contentSize;
+
+// 0: left, 1: right, 2:up, 3:down
+@property (assign) int currentMotion;
+@property (assign) int nextMotion;
 
 - (void)render;
 - (void)update;

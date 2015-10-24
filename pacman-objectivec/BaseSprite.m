@@ -10,6 +10,7 @@
 #import "BaseSprite.h"
 
 #define SQUARE_SIZE 30.0f
+#define MOVE_SPEED (2)
 
 typedef struct {
     GLKVector3 positionCoordinates;
@@ -98,38 +99,98 @@ VertexData SpriteVertices[] = {
     modelMatrix = GLKMatrix4Translate(modelMatrix, self.position.x, self.position.y, 0);
     modelMatrix = GLKMatrix4Translate(modelMatrix, self.contentSize.width/2, self.contentSize.height/2, 0);
     modelMatrix = GLKMatrix4Rotate(modelMatrix, GLKMathDegreesToRadians(90.0f), 0, 0, 1);
-    //modelMatrix = GLKMatrix4Translate(modelMatrix, -self.contentSize.width/2, -self.contentSize.height/2, 0);
-    
     //modelMatrix = GLKMatrix4Scale(modelMatrix, 0.25, 0.25, 0);
+
     return modelMatrix;
 }
 
 - (void)update {
-    GLKVector2 curMove = GLKVector2MultiplyScalar(self.moveVelocity, 1);
-    
-    GLKVector2 updatedPosition = GLKVector2Add(self.position, curMove);
- /*
-    NSLog(@"update curMove[%f, %f]", curMove.x, curMove.y);
-    NSLog(@"update bounday[%f, %f]", self.boundayX, self.boundayY);
-    NSLog(@"update bounday cal [%f, %f]", self.boundayX-(self.contentSize.width), self.boundayY-(self.contentSize.height));
-    NSLog(@"update updatedPosition[%f, %f]", updatedPosition.x, updatedPosition.y);
-    
-    NSLog(@"updatedPosition.x %f", updatedPosition.x);
-    NSLog(@"self.contentSize.width %f", self.contentSize.width);
-   */
-    if (self.boundayX > 0 && self.boundayY > 0) {
-        if (updatedPosition.x >= 0 &&
-            updatedPosition.x <= self.boundayX-(self.contentSize.width) &&
-            updatedPosition.y >= 0 &&
-            updatedPosition.y <= self.boundayY-(self.contentSize.height) ) {
-            //NSLog(@"update updatePosition");
-            self.position = updatedPosition;
-        } else {
-            //NSLog(@"update remain Position[%f, %f]", self.position.x, self.position.y);
-        }
-    } else {
-        self.position = updatedPosition;
+    GLKVector2 nextMotionVector;
+    switch (self.nextMotion) {
+        case 0:
+            nextMotionVector = GLKVector2Make(MOVE_SPEED, 0);
+            break;
+        case 1:
+            nextMotionVector = GLKVector2Make((-1)*MOVE_SPEED, 0);
+            break;
+        case 2:
+            nextMotionVector = GLKVector2Make(0, MOVE_SPEED);
+            break;
+        case 3:
+            nextMotionVector = GLKVector2Make(0, (-1)*MOVE_SPEED);
+            break;
+        default:
+            return;
     }
+    GLKVector2 nextMotionPosition = GLKVector2Add(self.position, nextMotionVector);
+    
+    if (self.boundayX > 0 && self.boundayY > 0) {
+        if (nextMotionPosition.x >= 0 &&
+            nextMotionPosition.x <= self.boundayX-(self.contentSize.width) &&
+            nextMotionPosition.y >= 0 &&
+            nextMotionPosition.y <= self.boundayY-(self.contentSize.height) &&
+            ![self bumpIntoWall:nextMotionPosition]) {
+            self.position = nextMotionPosition;
+            self.currentMotion = self.nextMotion;
+        }
+    }
+    
+    if (self.currentMotion != self.nextMotion) {
+        GLKVector2 currentMotionVector;
+        switch (self.currentMotion) {
+            case 0:
+                currentMotionVector = GLKVector2Make(MOVE_SPEED, 0);
+                break;
+            case 1:
+                currentMotionVector = GLKVector2Make((-1)*MOVE_SPEED, 0);
+                break;
+            case 2:
+                currentMotionVector = GLKVector2Make(0, MOVE_SPEED);
+                break;
+            case 3:
+                currentMotionVector = GLKVector2Make(0, (-1)*MOVE_SPEED);
+                break;
+            default:
+                return;
+        }
+        GLKVector2 currentMotionPosition = GLKVector2Add(self.position, currentMotionVector);
+        
+        if (self.boundayX > 0 && self.boundayY > 0) {
+            if (currentMotionPosition.x >= 0 &&
+                currentMotionPosition.x <= self.boundayX-(self.contentSize.width) &&
+                currentMotionPosition.y >= 0 &&
+                currentMotionPosition.y <= self.boundayY-(self.contentSize.height) &&
+                ![self bumpIntoWall:currentMotionPosition]) {
+                self.position = currentMotionPosition;
+            }
+        }
+
+    }
+
+}
+
+- (BOOL) bumpIntoWall:(GLKVector2) updatedPosition {
+    for (BaseMapSprite *mapSprite in self.mapSpriteArray) {
+        BOOL xCollision =
+            (mapSprite.position.x <= updatedPosition.x && mapSprite.position.x + [mapSprite getWidth] > updatedPosition.x) ||
+            (updatedPosition.x <= mapSprite.position.x && updatedPosition.x + SQUARE_SIZE > mapSprite.position.x);
+        BOOL yCollision =
+        (mapSprite.position.y <= updatedPosition.y && mapSprite.position.y + [mapSprite getHeight] > updatedPosition.y) ||
+        (updatedPosition.y <= mapSprite.position.y && updatedPosition.y + SQUARE_SIZE > mapSprite.position.y);
+
+        /*
+        NSLog(@"bumpIntoWall =====");
+        NSLog(@"updatedPosition [%f, %f]", updatedPosition.x, updatedPosition.y);
+        NSLog(@"mapSprite.position [%f, %f]", mapSprite.position.x, mapSprite.position.y);
+        NSLog(@"mapSprite getWH [%f, %f]", [mapSprite getWidth], [mapSprite getHeight]);
+        */
+        
+        if (xCollision && yCollision) {
+            return TRUE;
+        }
+    }
+    
+    return false;
 }
 
 - (void)setMoveBoundary:(float)boundaryX boundaryY:(float)boundaryY {

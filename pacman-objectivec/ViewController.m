@@ -9,6 +9,28 @@
 #import "ViewController.h"
 #import "MapSprite.h"
 #import "BaseSprite.h"
+#import "BaseMapSprite.h"
+#import "VerticalMapSprite.h"
+#import "HorizontalMapSprite.h"
+
+
+int VERTICAL_SPRITES[]   = {2, 1, 4, 1, 6, 1, 1, 2, 7, 2,
+                            4, 3, 1, 4, 2, 4, 6, 4 ,7, 4,
+                            1, 5, 2, 5, 3, 5, 5, 5, 6, 5,
+                            7, 5, 1, 6, 2, 6, 3, 6, 5, 6,
+                            6, 6, 7, 6, 3, 7, 5, 7, 1, 8,
+                            2, 8, 6, 8, 7, 8, 1, 9, 2, 9,
+                            4, 9, 6, 9, 7, 9, 1, 11, 3, 11,
+                            4, 11, 5, 11, 7, 11, 1, 12, 3, 12,
+                            4, 12, 5, 12, 7, 12};
+int HORIZONTAL_SPRITES[] = {1, 1, 2, 1, 5, 1, 6, 1, 3, 2,
+                            4, 2, 1, 3, 2, 3, 5, 3, 6, 3,
+                            0, 4, 3, 4, 4, 4, 7, 4, 3, 5,
+                            4, 5, 0, 7, 7, 7, 0, 8, 3, 8,
+                            4, 8, 7, 8, 2, 9, 5, 9, 0, 10,
+                            3, 10, 4, 10, 7, 10, 1, 11, 2, 11,
+                            5, 11, 6, 11, 1, 13, 2, 13, 5, 13,
+                            6, 13};
 
 @interface ViewController ()
 @property (assign) float screenWidth;
@@ -21,6 +43,7 @@
 @property (nonatomic, strong) BaseSprite *pacmanSprite;
 @property (nonatomic, strong) MapSprite * mapSprite;
 @property (strong) NSMutableArray * children;
+@property (strong) NSMutableArray * mapSpriteArray;
 @property (assign) CGPoint touchStartPoint;
 @property (assign) CGPoint touchEndPoint;
 @end
@@ -41,6 +64,7 @@
     if ((self = [super initWithCoder:aDecoder]) ) {
         // init children array
         self.children = [[NSMutableArray alloc] initWithCapacity:20];
+        self.mapSpriteArray = [[NSMutableArray alloc] initWithCapacity:100];
     }
     return self;
 }
@@ -70,10 +94,9 @@
     self.baseEffect = [[GLKBaseEffect alloc] init];
     self.baseEffect.transform.projectionMatrix = projectionMatrix;
     
-
-    
     // setup pacman
     self.pacmanSprite = [[BaseSprite alloc] initWithFile:@"pacman-2.png" effect:self.baseEffect];
+    self.pacmanSprite.position = GLKVector2Make(5, 9);
     [self.pacmanSprite setMoveBoundary:self.screenWidth boundaryY:self.screenHeight];
 
 
@@ -82,6 +105,8 @@
     self.mapEffect = [[GLKBaseEffect alloc] init];
     self.mapEffect.transform.projectionMatrix = projectionMatrixForMap;
     self.mapSprite = [[MapSprite alloc] initWithFile:@"map-1.png" effect:self.mapEffect];
+    [self initMap];
+    
     
     // gesture recognize
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
@@ -103,9 +128,48 @@
     
     // init touch
     self.isTouchStart = false;
-    
-    
 }
+
+- (void)initMap {
+    BaseMapSprite *mapSprite;
+    
+    int verticalSpritesSize = (sizeof(VERTICAL_SPRITES)/sizeof(int));
+    NSLog(@"verticalSpritesSize %d", verticalSpritesSize);
+    for (int i = 0 ; i < verticalSpritesSize ; i+=2) {
+        mapSprite = [[VerticalMapSprite alloc] initWithFile:@"wall-vertical.png" effect:self.baseEffect];
+        int x = 5 + (VERTICAL_SPRITES[i] * 30) + ((VERTICAL_SPRITES[i]-1) * 10);
+        int y;
+        if (VERTICAL_SPRITES[i+1] == 0) {
+            y = -1;
+        } else {
+            y = 9 + (VERTICAL_SPRITES[i+1] * 30) + ((VERTICAL_SPRITES[i+1] - 1) * 10);
+        }
+        mapSprite.position = GLKVector2Make(x, y);
+        [self.mapSpriteArray addObject:mapSprite];
+    }
+    
+    int horizontalSpritesSize = (sizeof(HORIZONTAL_SPRITES)/sizeof(int));
+    NSLog(@"verticalSpritesSize %d", horizontalSpritesSize);
+    for (int i = 0 ; i < horizontalSpritesSize ; i+=2) {
+        mapSprite = [[HorizontalMapSprite alloc] initWithFile:@"wall-horizontal.png" effect:self.baseEffect];
+        
+        int x;
+        if (HORIZONTAL_SPRITES[i] == 0) {
+            x = -5;
+        } else {
+            x = 5 + (HORIZONTAL_SPRITES[i] * 30) + ((HORIZONTAL_SPRITES[i]-1) * 10);
+        }
+        int y = 9 + (HORIZONTAL_SPRITES[i+1] * 30) + ((HORIZONTAL_SPRITES[i+1]-1) * 10);
+        mapSprite.position = GLKVector2Make(x, y);
+        [self.mapSpriteArray addObject:mapSprite];
+        
+    }
+    
+    self.pacmanSprite.mapSpriteArray = self.mapSpriteArray;
+}
+
+
+
 /*
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     self.touchStartPoint = [[touches anyObject] locationInView:self.view];
@@ -128,32 +192,6 @@
     }
 }
 */
-- (void) calculateMotion {
-    int motionX = self.touchEndPoint.x - self.touchStartPoint.x;
-    int motionY = self.touchStartPoint.y - self.touchEndPoint.y; // reverse Y axis
-    
-    if ((abs(motionX) * 3) < abs(motionY)) {
-        NSLog(@"Y motion");
-        if (motionY > 0) {
-            self.pacmanSprite.moveVelocity = GLKVector2Make(0, 10);
-        } else {
-            self.pacmanSprite.moveVelocity = GLKVector2Make(0 ,-10);
-        }
-    } else if ((abs(motionY) * 3) < abs(motionX)) {
-        NSLog(@"X motion");
-        if (motionX > 0) {
-            self.pacmanSprite.moveVelocity = GLKVector2Make(10, 0);
-        } else {
-            self.pacmanSprite.moveVelocity = GLKVector2Make(-10, 0);
-        }
-    }
-}
-
-
-/*
- - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
- CGPoint touchPoint = [[touches anyObject] locationView:self.view];
- }*/
 
 - (void)handleTapFrom:(UITapGestureRecognizer *)recognizer {
     
@@ -165,22 +203,23 @@
 
 - (void)handleSwipeUp:(UISwipeGestureRecognizer *)recognizer {
     NSLog(@"Swipe up");
-    self.pacmanSprite.moveVelocity = GLKVector2Make(0, 10);
+    self.pacmanSprite.nextMotion = 2;
+    //self.pacmanSprite.moveVelocity = GLKVector2Make(0, MOVE_SPEED);
 }
 
 - (void)handleSwipeDown:(UISwipeGestureRecognizer *)recognizer {
     NSLog(@"Swipe down");
-    self.pacmanSprite.moveVelocity = GLKVector2Make(0, -10);
+    self.pacmanSprite.nextMotion = 3;
 }
 
 - (void)handleSwipeRight:(UISwipeGestureRecognizer *)recognizer {
     NSLog(@"Swipe right");
-    self.pacmanSprite.moveVelocity = GLKVector2Make(10, 0);
+    self.pacmanSprite.nextMotion = 0;
 }
 
 - (void)handleSwipeLeft:(UISwipeGestureRecognizer *)recognizer {
     NSLog(@"Swipe left");
-    self.pacmanSprite.moveVelocity = GLKVector2Make(-10, 0);
+    self.pacmanSprite.nextMotion = 1;
 }
 
 - (void)addGhost {
@@ -230,13 +269,16 @@
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
     //NSLog(@"drawInRect %@", view);
-    glClearColor(0, 0.9, 0, 1);
+    glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
     
-    [self.mapSprite render];
+    //[self.mapSprite render];
     [self.pacmanSprite render];
+    for (BaseMapSprite *mapSprite in self.mapSpriteArray) {
+        [mapSprite render];
+    }
     for (BaseSprite * sprite in self.children) {
         [sprite render];
     }
@@ -249,7 +291,7 @@
     self.timeSinceLastSpawn += self.timeSinceLastUpdate;
     if (self.timeSinceLastSpawn > 1.0) {
         self.timeSinceLastSpawn = 0;
-        [self addGhost];
+        //[self addGhost];
     }
     
     for (BaseSprite * sprite in self.children) {
