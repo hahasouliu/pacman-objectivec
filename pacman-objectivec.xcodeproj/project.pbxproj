@@ -9,14 +9,12 @@
 /* Begin PBXBuildFile section */
 		F108FB1B1BD91D43002DB648 /* wall-horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = F108FB191BD91D43002DB648 /* wall-horizontal.png */; settings = {ASSET_TAGS = (); }; };
 		F108FB1C1BD91D43002DB648 /* wall-vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = F108FB1A1BD91D43002DB648 /* wall-vertical.png */; settings = {ASSET_TAGS = (); }; };
-		F108FB1F1BD91D5D002DB648 /* VerticalMapSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = F108FB1E1BD91D5D002DB648 /* VerticalMapSprite.m */; settings = {ASSET_TAGS = (); }; };
-		F108FB221BD926C0002DB648 /* HorizontalMapSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = F108FB211BD926C0002DB648 /* HorizontalMapSprite.m */; settings = {ASSET_TAGS = (); }; };
 		F157FD691BCE94EC00C89081 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F157FD681BCE94EC00C89081 /* QuartzCore.framework */; };
 		F157FD6B1BCE94F400C89081 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F157FD6A1BCE94F400C89081 /* OpenGLES.framework */; };
 		F157FD6E1BCE957C00C89081 /* BaseSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = F157FD6D1BCE957C00C89081 /* BaseSprite.m */; settings = {ASSET_TAGS = (); }; };
-		F157FD711BCE95FA00C89081 /* MapSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = F157FD701BCE95FA00C89081 /* MapSprite.m */; settings = {ASSET_TAGS = (); }; };
 		F157FD7A1BCE97FC00C89081 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F157FD791BCE97FC00C89081 /* Foundation.framework */; };
 		F157FD7E1BCE994E00C89081 /* GameScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F157FD7D1BCE994E00C89081 /* GameScene.storyboard */; settings = {ASSET_TAGS = (); }; };
+		F169230A1BDBE73D005213B2 /* solid-square.png in Resources */ = {isa = PBXBuildFile; fileRef = F16923091BDBE73D005213B2 /* solid-square.png */; settings = {ASSET_TAGS = (); }; };
 		F18D4F871BD7C5FE007F2401 /* BaseMapSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = F18D4F861BD7C5FE007F2401 /* BaseMapSprite.m */; settings = {ASSET_TAGS = (); }; };
 		F1CED4981BCE946C0019A9DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CED4971BCE946C0019A9DF /* main.m */; };
 		F1CED49B1BCE946C0019A9DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CED49A1BCE946C0019A9DF /* AppDelegate.m */; };
@@ -52,18 +50,13 @@
 /* Begin PBXFileReference section */
 		F108FB191BD91D43002DB648 /* wall-horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wall-horizontal.png"; path = "pacman-resources/wall-horizontal.png"; sourceTree = "<group>"; };
 		F108FB1A1BD91D43002DB648 /* wall-vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wall-vertical.png"; path = "pacman-resources/wall-vertical.png"; sourceTree = "<group>"; };
-		F108FB1D1BD91D5D002DB648 /* VerticalMapSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerticalMapSprite.h; sourceTree = "<group>"; };
-		F108FB1E1BD91D5D002DB648 /* VerticalMapSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerticalMapSprite.m; sourceTree = "<group>"; };
-		F108FB201BD926C0002DB648 /* HorizontalMapSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalMapSprite.h; sourceTree = "<group>"; };
-		F108FB211BD926C0002DB648 /* HorizontalMapSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalMapSprite.m; sourceTree = "<group>"; };
 		F157FD681BCE94EC00C89081 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F157FD6A1BCE94F400C89081 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		F157FD6C1BCE957C00C89081 /* BaseSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSprite.h; sourceTree = "<group>"; };
 		F157FD6D1BCE957C00C89081 /* BaseSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSprite.m; sourceTree = "<group>"; };
-		F157FD6F1BCE95FA00C89081 /* MapSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapSprite.h; sourceTree = "<group>"; };
-		F157FD701BCE95FA00C89081 /* MapSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapSprite.m; sourceTree = "<group>"; };
 		F157FD791BCE97FC00C89081 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F157FD7D1BCE994E00C89081 /* GameScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GameScene.storyboard; sourceTree = "<group>"; };
+		F16923091BDBE73D005213B2 /* solid-square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "solid-square.png"; path = "pacman-resources/solid-square.png"; sourceTree = "<group>"; };
 		F18D4F851BD7C5FE007F2401 /* BaseMapSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMapSprite.h; sourceTree = "<group>"; };
 		F18D4F861BD7C5FE007F2401 /* BaseMapSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMapSprite.m; sourceTree = "<group>"; };
 		F1CED4931BCE946C0019A9DF /* pacman-objectivec.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pacman-objectivec.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,14 +144,8 @@
 				F1CED49D1BCE946C0019A9DF /* ViewController.m */,
 				F157FD6C1BCE957C00C89081 /* BaseSprite.h */,
 				F157FD6D1BCE957C00C89081 /* BaseSprite.m */,
-				F157FD6F1BCE95FA00C89081 /* MapSprite.h */,
-				F157FD701BCE95FA00C89081 /* MapSprite.m */,
 				F18D4F851BD7C5FE007F2401 /* BaseMapSprite.h */,
 				F18D4F861BD7C5FE007F2401 /* BaseMapSprite.m */,
-				F108FB1D1BD91D5D002DB648 /* VerticalMapSprite.h */,
-				F108FB1E1BD91D5D002DB648 /* VerticalMapSprite.m */,
-				F108FB201BD926C0002DB648 /* HorizontalMapSprite.h */,
-				F108FB211BD926C0002DB648 /* HorizontalMapSprite.m */,
 				F1CED4A21BCE946C0019A9DF /* Assets.xcassets */,
 				F157FD7D1BCE994E00C89081 /* GameScene.storyboard */,
 				F1CED4A41BCE946C0019A9DF /* LaunchScreen.storyboard */,
@@ -197,6 +184,7 @@
 		F1E8E25E1BCFD33600AD0868 /* pacman-resources */ = {
 			isa = PBXGroup;
 			children = (
+				F16923091BDBE73D005213B2 /* solid-square.png */,
 				F108FB191BD91D43002DB648 /* wall-horizontal.png */,
 				F108FB1A1BD91D43002DB648 /* wall-vertical.png */,
 				F1F5B1A01BD7C58500F25CB9 /* wall-1.png */,
@@ -318,6 +306,7 @@
 				F157FD7E1BCE994E00C89081 /* GameScene.storyboard in Resources */,
 				F108FB1B1BD91D43002DB648 /* wall-horizontal.png in Resources */,
 				F1F5B1A11BD7C58500F25CB9 /* wall-1.png in Resources */,
+				F169230A1BDBE73D005213B2 /* solid-square.png in Resources */,
 				F1CED4A31BCE946C0019A9DF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,12 +334,9 @@
 			files = (
 				F18D4F871BD7C5FE007F2401 /* BaseMapSprite.m in Sources */,
 				F1CED49E1BCE946C0019A9DF /* ViewController.m in Sources */,
-				F108FB1F1BD91D5D002DB648 /* VerticalMapSprite.m in Sources */,
 				F157FD6E1BCE957C00C89081 /* BaseSprite.m in Sources */,
-				F157FD711BCE95FA00C89081 /* MapSprite.m in Sources */,
 				F1CED49B1BCE946C0019A9DF /* AppDelegate.m in Sources */,
 				F1CED4981BCE946C0019A9DF /* main.m in Sources */,
-				F108FB221BD926C0002DB648 /* HorizontalMapSprite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

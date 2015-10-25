@@ -17,18 +17,11 @@ typedef struct {
     GLKVector2 textureCoordinates;
 } VertexData;
 
-VertexData BaseMapVertices[] = {
-    {{-SQUARE_WIDTH/2, -SQUARE_HEIGHT/2, 0.0f}, {0.0f, 0.0f}},
-    {{SQUARE_WIDTH/2, -SQUARE_HEIGHT/2, 0.0f}, {1.0f, 0.0f}},
-    {{-SQUARE_WIDTH/2, SQUARE_HEIGHT/2, 0.0f}, {0.0f, 1.0f}},
-    {{-SQUARE_WIDTH/2, SQUARE_HEIGHT/2, 0.0f}, {0.0f, 1.0f}},
-    {{SQUARE_WIDTH/2, -SQUARE_HEIGHT/2, 0.0f}, {1.0f, 0.0f}},
-    {{SQUARE_WIDTH/2, SQUARE_HEIGHT/2, 0.0f}, {1.0f, 1.0f}}
-};
-
 @interface BaseMapSprite()
 
 @property (nonatomic, weak) GLKBaseEffect *baseEffect;
+@property (assign) float width;
+@property (assign) float height;
 
 @end
 
@@ -36,6 +29,7 @@ VertexData BaseMapVertices[] = {
 
 @implementation BaseMapSprite {
     GLuint _vertextBufferId;
+    VertexData *_baseMapVertices;
 }
 
 - (id)initWithFile:(NSString *)fileName effect:(GLKBaseEffect *)effect {
@@ -61,6 +55,24 @@ VertexData BaseMapVertices[] = {
     return self;
 }
 
+- (void) setSize:(float)width height:(float)height {
+    _baseMapVertices = malloc(sizeof(VertexData) * 6);
+    _baseMapVertices[0].positionCoordinates = GLKVector3Make((-1)*width/2, (-1)*height/2, 0.0f);
+    _baseMapVertices[0].textureCoordinates = GLKVector2Make(0.0f, 0.0f);
+    _baseMapVertices[1].positionCoordinates = GLKVector3Make(width/2, (-1)*height/2, 0.0f);
+    _baseMapVertices[1].textureCoordinates = GLKVector2Make(1.0f, 0.0f);
+    _baseMapVertices[2].positionCoordinates = GLKVector3Make((-1)*width/2, height/2, 0.0f);
+    _baseMapVertices[2].textureCoordinates = GLKVector2Make(0.0f, 1.0f);
+    _baseMapVertices[3].positionCoordinates = GLKVector3Make((-1)*width/2, height/2, 0.0f);
+    _baseMapVertices[3].textureCoordinates = GLKVector2Make(0.0f, 1.0f);
+    _baseMapVertices[4].positionCoordinates = GLKVector3Make(width/2, (-1)*height/2, 0.0f);
+    _baseMapVertices[4].textureCoordinates = GLKVector2Make(1.0f, 0.0f);
+    _baseMapVertices[5].positionCoordinates = GLKVector3Make(width/2, height/2, 0.0f);
+    _baseMapVertices[5].textureCoordinates = GLKVector2Make(1.0f, 1.0f);
+    self.width = width;
+    self.height = height;
+}
+
 
 - (id)initWithEffect:(GLKBaseEffect *)baseEffect {
     if ((self = [super init])) {
@@ -72,7 +84,7 @@ VertexData BaseMapVertices[] = {
 - (void)render {
     glGenBuffers(1, &_vertextBufferId);
     glBindBuffer(GL_ARRAY_BUFFER, _vertextBufferId);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(BaseMapVertices), BaseMapVertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(VertexData) * 6, _baseMapVertices, GL_STATIC_DRAW);
     
     glEnableVertexAttribArray(GLKVertexAttribPosition);
     glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(VertexData),
@@ -95,16 +107,16 @@ VertexData BaseMapVertices[] = {
     GLKMatrix4 modelMatrix = GLKMatrix4Identity;
 
     modelMatrix = GLKMatrix4Translate(modelMatrix, self.position.x, self.position.y, 0);
-    modelMatrix = GLKMatrix4Translate(modelMatrix, SQUARE_WIDTH/2, SQUARE_HEIGHT/2, 0);
+    modelMatrix = GLKMatrix4Translate(modelMatrix, self.width/2, self.height/2, 0);
     return modelMatrix;
 }
 
 - (float) getWidth {
-    return SQUARE_WIDTH;
+    return self.width;
 }
 
 - (float) getHeight {
-    return SQUARE_HEIGHT;
+    return self.height;
 }
 
 

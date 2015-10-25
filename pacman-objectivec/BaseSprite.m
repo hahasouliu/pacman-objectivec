@@ -26,6 +26,9 @@ VertexData SpriteVertices[] = {
     {{SQUARE_SIZE/2, SQUARE_SIZE/2, 0.0f}, {1.0f, 1.0f}}
 };
 
+// 0: right, 1: left, 2:up, 3:down
+float RotateDegreeBasedOnMotion[] = {0.0f, 180.0f, 90.0f, 270.0f};
+
 @interface BaseSprite()
 
 @property (nonatomic, weak) GLKBaseEffect *baseEffect;
@@ -33,8 +36,6 @@ VertexData SpriteVertices[] = {
 @property (assign) float boundayY;
 
 @end
-
-
 
 @implementation BaseSprite {
     GLuint _vertextBufferId;
@@ -98,13 +99,14 @@ VertexData SpriteVertices[] = {
     
     modelMatrix = GLKMatrix4Translate(modelMatrix, self.position.x, self.position.y, 0);
     modelMatrix = GLKMatrix4Translate(modelMatrix, self.contentSize.width/2, self.contentSize.height/2, 0);
-    modelMatrix = GLKMatrix4Rotate(modelMatrix, GLKMathDegreesToRadians(90.0f), 0, 0, 1);
+    modelMatrix = GLKMatrix4Rotate(modelMatrix, GLKMathDegreesToRadians(RotateDegreeBasedOnMotion[self.currentMotion]), 0, 0, 1);
     //modelMatrix = GLKMatrix4Scale(modelMatrix, 0.25, 0.25, 0);
 
     return modelMatrix;
 }
 
 - (void)update {
+    //NSLog(@"---------- update ----------");
     GLKVector2 nextMotionVector;
     switch (self.nextMotion) {
         case 0:
@@ -177,13 +179,13 @@ VertexData SpriteVertices[] = {
         BOOL yCollision =
         (mapSprite.position.y <= updatedPosition.y && mapSprite.position.y + [mapSprite getHeight] > updatedPosition.y) ||
         (updatedPosition.y <= mapSprite.position.y && updatedPosition.y + SQUARE_SIZE > mapSprite.position.y);
-
-        /*
-        NSLog(@"bumpIntoWall =====");
-        NSLog(@"updatedPosition [%f, %f]", updatedPosition.x, updatedPosition.y);
-        NSLog(@"mapSprite.position [%f, %f]", mapSprite.position.x, mapSprite.position.y);
-        NSLog(@"mapSprite getWH [%f, %f]", [mapSprite getWidth], [mapSprite getHeight]);
-        */
+/*
+        if (xCollision && yCollision) {
+            NSLog(@"bumpIntoWall [%d, %d]", xCollision, yCollision);
+            NSLog(@"updatedPosition [%f, %f]", updatedPosition.x, updatedPosition.y);
+            NSLog(@"mapSprite.position [%f, %f]", mapSprite.position.x, mapSprite.position.y);
+            NSLog(@"mapSprite getWH [%f, %f]", [mapSprite getWidth], [mapSprite getHeight]);
+        }*/
         
         if (xCollision && yCollision) {
             return TRUE;

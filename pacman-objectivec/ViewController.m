@@ -7,45 +7,48 @@
 //
 
 #import "ViewController.h"
-#import "MapSprite.h"
 #import "BaseSprite.h"
 #import "BaseMapSprite.h"
-#import "VerticalMapSprite.h"
-#import "HorizontalMapSprite.h"
 
+#define SPRITE_PATH_ROW 13
+#define SPRITE_PATH_COL 8
+#define SPRITE_SIZE 30
+#define MAP_SPRITE_SHORT_SIDE (10.0f)
+#define MAP_SPRITE_LONG_SIDE  (50.0f) // LONG_SIDE = SPRITE_SIZE + SHORT_SIDE*2
 
-int VERTICAL_SPRITES[]   = {2, 1, 4, 1, 6, 1, 1, 2, 7, 2,
+int VERTICAL_MAP_SPRITES[]   = {2, 1, 4, 1, 6, 1, 1, 2, 7, 2,
                             4, 3, 1, 4, 2, 4, 6, 4 ,7, 4,
                             1, 5, 2, 5, 3, 5, 5, 5, 6, 5,
-                            7, 5, 1, 6, 2, 6, 3, 6, 5, 6,
-                            6, 6, 7, 6, 3, 7, 5, 7, 1, 8,
-                            2, 8, 6, 8, 7, 8, 1, 9, 2, 9,
-                            4, 9, 6, 9, 7, 9, 1, 11, 3, 11,
-                            4, 11, 5, 11, 7, 11, 1, 12, 3, 12,
-                            4, 12, 5, 12, 7, 12};
-int HORIZONTAL_SPRITES[] = {1, 1, 2, 1, 5, 1, 6, 1, 3, 2,
+                            7, 5, 3, 6, 5, 6, 1, 7, 2, 7,
+                            6, 7, 7, 7, 1, 8, 2, 8, 4, 8,
+                            6, 8, 7, 8, 1, 10, 3, 10, 4, 10,
+                            5, 10, 7, 10, 1, 11, 3, 11, 4, 11,
+                            5, 11, 7, 11};
+int HORIZONTAL_MAP_SPRITES[] = {1, 1, 2, 1, 5, 1, 6, 1, 3, 2,
                             4, 2, 1, 3, 2, 3, 5, 3, 6, 3,
-                            0, 4, 3, 4, 4, 4, 7, 4, 3, 5,
-                            4, 5, 0, 7, 7, 7, 0, 8, 3, 8,
-                            4, 8, 7, 8, 2, 9, 5, 9, 0, 10,
-                            3, 10, 4, 10, 7, 10, 1, 11, 2, 11,
-                            5, 11, 6, 11, 1, 13, 2, 13, 5, 13,
-                            6, 13};
+                            3, 4, 4, 4, 3, 5, 4, 5, 3, 7,
+                            4, 7, 2, 8, 5, 8, 3, 9, 4, 9,
+                            1, 10, 2, 10, 5, 10, 6, 10, 1,
+                            12, 2, 12, 5, 12, 6, 12};
 
 @interface ViewController ()
 @property (assign) float screenWidth;
 @property (assign) float screenHeight;
+@property (assign) int mapLeftMargin;
+@property (assign) int mapRightMargin;
+@property (assign) int mapTopMargin;
+@property (assign) int mapBottomMargin;
 @property (assign) float timeSinceLastSpawn;
 @property (assign) bool isTouchStart;
 @property (nonatomic, strong) EAGLContext *context;
 @property (nonatomic, strong) GLKBaseEffect *baseEffect;
 @property (nonatomic, strong) GLKBaseEffect * mapEffect;
 @property (nonatomic, strong) BaseSprite *pacmanSprite;
-@property (nonatomic, strong) MapSprite * mapSprite;
 @property (strong) NSMutableArray * children;
 @property (strong) NSMutableArray * mapSpriteArray;
 @property (assign) CGPoint touchStartPoint;
 @property (assign) CGPoint touchEndPoint;
+@property (nonatomic, weak) IBOutlet UILabel *labelTest;
 @end
 
 @implementation ViewController {
@@ -58,6 +61,7 @@ int HORIZONTAL_SPRITES[] = {1, 1, 2, 1, 5, 1, 6, 1, 3, 2,
 @synthesize isTouchStart = _isTouchStart;
 @synthesize touchStartPoint = _touchStartPoint;
 @synthesize touchEndPoint = _touchEndPoint;
+@synthesize labelTest = _labelTest;
 
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -93,30 +97,38 @@ int HORIZONTAL_SPRITES[] = {1, 1, 2, 1, 5, 1, 6, 1, 3, 2,
     GLKMatrix4 projectionMatrix = GLKMatrix4MakeOrtho(0, self.screenWidth, 0, self.screenHeight, -1024, 1024);
     self.baseEffect = [[GLKBaseEffect alloc] init];
     self.baseEffect.transform.projectionMatrix = projectionMatrix;
+
+
+    // init margin values
+    // x-shift for map sprites
+    self.mapLeftMargin = (self.screenWidth - SPRITE_PATH_COL * SPRITE_SIZE
+                                           - (SPRITE_PATH_COL-1) * MAP_SPRITE_SHORT_SIDE)
+                                           / 2;
+    // for right wall position
+    self.mapRightMargin = self.mapLeftMargin;
+    // for top wall position
+    self.mapTopMargin = MAP_SPRITE_SHORT_SIDE;
+    // y-shift for map sprites
+    self.mapBottomMargin = self.screenHeight - SPRITE_PATH_ROW * SPRITE_SIZE
+                            - SPRITE_PATH_ROW * MAP_SPRITE_SHORT_SIDE;
+    NSLog(@"mapLeftMargin %d", self.mapLeftMargin);
+    NSLog(@"mapRightMargin %d", self.mapRightMargin);
+    NSLog(@"mapTopMargin %d", self.mapTopMargin);
+    NSLog(@"mapBottomMargin %d", self.mapBottomMargin);
     
     // setup pacman
     self.pacmanSprite = [[BaseSprite alloc] initWithFile:@"pacman-2.png" effect:self.baseEffect];
-    self.pacmanSprite.position = GLKVector2Make(5, 9);
+    self.pacmanSprite.position = GLKVector2Make(self.mapLeftMargin, self.mapBottomMargin);
     [self.pacmanSprite setMoveBoundary:self.screenWidth boundaryY:self.screenHeight];
-
-
+    
     // setup map
-    GLKMatrix4 projectionMatrixForMap = GLKMatrix4MakeOrtho(0, 320, 0, 568, -1024, 1024);
-    self.mapEffect = [[GLKBaseEffect alloc] init];
-    self.mapEffect.transform.projectionMatrix = projectionMatrixForMap;
-    self.mapSprite = [[MapSprite alloc] initWithFile:@"map-1.png" effect:self.mapEffect];
     [self initMap];
     
-    
     // gesture recognize
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
-    [self.view addGestureRecognizer:tapRecognizer];
-    
     UISwipeGestureRecognizer *swipeUpRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeUp:)];
     UISwipeGestureRecognizer *swipeDownRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeDown:)];
     UISwipeGestureRecognizer *swipeRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeRight:)];
     UISwipeGestureRecognizer *swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeLeft:)];
-    
     swipeUpRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
     swipeDownRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
     swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
@@ -128,70 +140,116 @@ int HORIZONTAL_SPRITES[] = {1, 1, 2, 1, 5, 1, 6, 1, 3, 2,
     
     // init touch
     self.isTouchStart = false;
+    
+    // label
+    self.labelTest.text = @"Score";
+    UIView *viewTest = self.labelTest;
+    [_labelTest setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    NSMutableArray *myConstraints = [NSMutableArray array];
+    [myConstraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[viewTest(64)]"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:NSDictionaryOfVariableBindings(viewTest)]];
+    [myConstraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:[viewTest(32)]-|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                             views:NSDictionaryOfVariableBindings(viewTest)]];
+    [self.view addConstraints:myConstraints];
+
+/*
+    NSLayoutConstraint *myConstraint;
+    [_labelTest setTranslatesAutoresizingMaskIntoConstraints:NO];
+    myConstraint = [NSLayoutConstraint constraintWithItem:_labelTest attribute:NSLayoutAttributeBottom
+                                                relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                   toItem:[_labelTest superview] attribute:NSLayoutAttributeBottom
+                                               multiplier:1.0f constant:-50.0f];
+    [self.view addConstraint:myConstraint];
+    
+    myConstraint = [NSLayoutConstraint constraintWithItem:_labelTest attribute:NSLayoutAttributeWidth
+                                                relatedBy:NSLayoutRelationEqual
+                                                   toItem:nil attribute:NSLayoutAttributeNotAnAttribute
+                                               multiplier:1.0f constant:210.0f];
+    [self.view addConstraint:myConstraint];
+    
+    //高度限制
+    myConstraint = [NSLayoutConstraint constraintWithItem:_labelTest attribute:NSLayoutAttributeHeight
+                                                relatedBy:NSLayoutRelationEqual
+                                                   toItem:nil attribute:NSLayoutAttributeNotAnAttribute
+                                               multiplier:1.0f constant:100.0f];
+    [self.view addConstraint:myConstraint];
+  */
+
 }
 
 - (void)initMap {
     BaseMapSprite *mapSprite;
     
-    int verticalSpritesSize = (sizeof(VERTICAL_SPRITES)/sizeof(int));
+    int verticalSpritesSize = (sizeof(VERTICAL_MAP_SPRITES)/sizeof(int));
     NSLog(@"verticalSpritesSize %d", verticalSpritesSize);
     for (int i = 0 ; i < verticalSpritesSize ; i+=2) {
-        mapSprite = [[VerticalMapSprite alloc] initWithFile:@"wall-vertical.png" effect:self.baseEffect];
-        int x = 5 + (VERTICAL_SPRITES[i] * 30) + ((VERTICAL_SPRITES[i]-1) * 10);
-        int y;
-        if (VERTICAL_SPRITES[i+1] == 0) {
-            y = -1;
-        } else {
-            y = 9 + (VERTICAL_SPRITES[i+1] * 30) + ((VERTICAL_SPRITES[i+1] - 1) * 10);
-        }
+        mapSprite = [[BaseMapSprite alloc] initWithFile:@"wall-vertical.png" effect:self.baseEffect];
+        [mapSprite setSize:MAP_SPRITE_SHORT_SIDE height:MAP_SPRITE_LONG_SIDE];
+        int x = self.mapLeftMargin + (VERTICAL_MAP_SPRITES[i] * SPRITE_SIZE)
+                                   + ((VERTICAL_MAP_SPRITES[i]-1) * MAP_SPRITE_SHORT_SIDE);
+        int y = self.mapBottomMargin + (VERTICAL_MAP_SPRITES[i+1] * SPRITE_SIZE)
+                                     + ((VERTICAL_MAP_SPRITES[i+1] - 1) * MAP_SPRITE_SHORT_SIDE);
         mapSprite.position = GLKVector2Make(x, y);
         [self.mapSpriteArray addObject:mapSprite];
     }
     
-    int horizontalSpritesSize = (sizeof(HORIZONTAL_SPRITES)/sizeof(int));
+    int horizontalSpritesSize = (sizeof(HORIZONTAL_MAP_SPRITES)/sizeof(int));
     NSLog(@"verticalSpritesSize %d", horizontalSpritesSize);
     for (int i = 0 ; i < horizontalSpritesSize ; i+=2) {
-        mapSprite = [[HorizontalMapSprite alloc] initWithFile:@"wall-horizontal.png" effect:self.baseEffect];
-        
-        int x;
-        if (HORIZONTAL_SPRITES[i] == 0) {
-            x = -5;
-        } else {
-            x = 5 + (HORIZONTAL_SPRITES[i] * 30) + ((HORIZONTAL_SPRITES[i]-1) * 10);
-        }
-        int y = 9 + (HORIZONTAL_SPRITES[i+1] * 30) + ((HORIZONTAL_SPRITES[i+1]-1) * 10);
+        mapSprite = [[BaseMapSprite alloc] initWithFile:@"wall-horizontal.png" effect:self.baseEffect];
+        [mapSprite setSize:MAP_SPRITE_LONG_SIDE height:MAP_SPRITE_SHORT_SIDE];
+        int x = self.mapLeftMargin + (HORIZONTAL_MAP_SPRITES[i] * SPRITE_SIZE)
+                                   + ((HORIZONTAL_MAP_SPRITES[i]-1) * MAP_SPRITE_SHORT_SIDE);
+        int y = self.mapBottomMargin + (HORIZONTAL_MAP_SPRITES[i+1] * SPRITE_SIZE)
+                                     + ((HORIZONTAL_MAP_SPRITES[i+1]-1) * MAP_SPRITE_SHORT_SIDE);
         mapSprite.position = GLKVector2Make(x, y);
         [self.mapSpriteArray addObject:mapSprite];
         
     }
     
-    self.pacmanSprite.mapSpriteArray = self.mapSpriteArray;
-}
-
-
-
-/*
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    self.touchStartPoint = [[touches anyObject] locationInView:self.view];
-    NSLog(@"touchesBegan [%f, %f]", self.touchStartPoint.x, self.touchStartPoint.y);
-    self.isTouchStart = true;
-}
-
-- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    //CGPoint touchMovingPoint = [[touches anyObject] locationInView:self.view];
-    //NSLog(@"touchesMoved [%f, %f]", touchMovingPoint.x, touchMovingPoint.y);
-}
-
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    self.touchEndPoint = [[touches anyObject] locationInView:self.view];
-    NSLog(@"touchesEnded [%f, %f]", self.touchEndPoint.x, self.touchEndPoint.y);
+    int topBottomWallWidth  = SPRITE_SIZE*(SPRITE_PATH_COL) + MAP_SPRITE_SHORT_SIDE*(SPRITE_PATH_COL+1);
+    int rightLeftWallHeight = SPRITE_SIZE*(SPRITE_PATH_ROW) + MAP_SPRITE_SHORT_SIDE*(SPRITE_PATH_ROW+1);
     
-    if (self.isTouchStart) {
-        self.isTouchStart = false;
-        [self calculateMotion];
+    // bottom wall
+    mapSprite = [[BaseMapSprite alloc] initWithFile:@"solid-square.png" effect:self.baseEffect];
+    [mapSprite setSize:topBottomWallWidth height:MAP_SPRITE_SHORT_SIDE];
+    mapSprite.position = GLKVector2Make(self.mapLeftMargin - MAP_SPRITE_SHORT_SIDE,
+                                        self.mapBottomMargin - MAP_SPRITE_SHORT_SIDE - 1);
+    [self.mapSpriteArray addObject:mapSprite];
+    
+    // top wall
+    mapSprite = [[BaseMapSprite alloc] initWithFile:@"solid-square.png" effect:self.baseEffect];
+    [mapSprite setSize:topBottomWallWidth height:MAP_SPRITE_SHORT_SIDE];
+    mapSprite.position = GLKVector2Make(self.mapLeftMargin - MAP_SPRITE_SHORT_SIDE, self.screenHeight-MAP_SPRITE_SHORT_SIDE);
+    [self.mapSpriteArray addObject:mapSprite];
+
+    // left wall
+    mapSprite = [[BaseMapSprite alloc] initWithFile:@"solid-square.png" effect:self.baseEffect];
+    [mapSprite setSize:MAP_SPRITE_SHORT_SIDE height:rightLeftWallHeight];
+    mapSprite.position = GLKVector2Make(self.mapLeftMargin - MAP_SPRITE_SHORT_SIDE,
+                                        self.mapBottomMargin - MAP_SPRITE_SHORT_SIDE - 1);
+    [self.mapSpriteArray addObject:mapSprite];
+    
+    // right wall
+    mapSprite = [[BaseMapSprite alloc] initWithFile:@"solid-square.png" effect:self.baseEffect];
+    [mapSprite setSize:MAP_SPRITE_SHORT_SIDE height:rightLeftWallHeight];
+    mapSprite.position = GLKVector2Make(self.screenWidth - self.mapRightMargin,
+                                        self.mapBottomMargin - MAP_SPRITE_SHORT_SIDE - 1);
+    [self.mapSpriteArray addObject:mapSprite];
+    
+    if (self.pacmanSprite) {
+        self.pacmanSprite.mapSpriteArray = self.mapSpriteArray;
+    } else {
+        NSLog(@"initMap before pacman is setup");
     }
 }
-*/
 
 - (void)handleTapFrom:(UITapGestureRecognizer *)recognizer {
     
@@ -232,7 +290,6 @@ int HORIZONTAL_SPRITES[] = {1, 1, 2, 1, 5, 1, 6, 1, 3, 2,
     //NSLog(@"ghost y [%d, %d]", minY, maxY);
     int rangeY = maxY - minY;
     int actualY = (arc4random() % rangeY) + minY;
-    
     
     ghost.position = GLKVector2Make(320, actualY);
     

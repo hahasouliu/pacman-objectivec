@@ -16,8 +16,10 @@
 @property (assign) GLKVector2 position;
 
 - (id)initWithFile:(NSString *)fileName effect:(GLKBaseEffect *)effect;
+- (void) setSize:(float)width height:(float)height;
 - (void)render;
 - (float) getWidth;
 - (float) getHeight;
+
 
 @end
